@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.geosenseapp.geosense",
+      "sha256_cert_fingerprints": [
+        "F6:45:CC:73:E6:58:0C:BF:E4:91:6C:DA:D2:C0:82:0C:32:7C:31:AC:95:22:0B:61:E9:E4:99:C0:D8:17:85:91"
+      ]
+    }
+  }
+]
