@@ -1,0 +1,33 @@
+// The app page's live bits: screenshots in the page's language, the daily
+// challenge number from the link, and the version, date and size of the
+// APK on offer. Runs after lang.js.
+(function () {
+  var es = document.documentElement.lang === 'es';
+
+  document.querySelectorAll('#shots img').forEach(function (img) {
+    img.src = 'shots/' + (es ? 'es-' : 'en-') + img.getAttribute('data-n') + '.jpg';
+    if (es) img.alt = img.getAttribute('data-es-alt');
+  });
+
+  // "/d?7", or "?n=7" from the old /daily/ links: which challenge was shared.
+  var label = document.getElementById('label');
+  if (label) {
+    var n = new URLSearchParams(location.search).get('n') || location.search.slice(1);
+    var text = es ? 'Reto diario' : 'Daily challenge';
+    if (/^\d+$/.test(n)) text += (es ? ' n.º ' : ' #') + n;
+    label.textContent = text;
+  }
+
+  // The release the download button gives. Left as written in the page if
+  // GitHub does not answer.
+  fetch('https://api.github.com/repos/geosenselearnthemetas-arch/geosenselearnthemetas-arch.github.io/releases/latest')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (release) {
+      var version = (release.name || '').replace(/^GeoSense\s*/, '');
+      var date = new Date(release.published_at).toLocaleDateString(es ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      document.getElementById('release').textContent = (es ? 'Versión ' : 'Version ') + version + ' · ' + date;
+      var apk = (release.assets || []).filter(function (a) { return /\.apk$/.test(a.name); })[0];
+      if (apk) document.getElementById('size').textContent = Math.round(apk.size / 1048576) + ' MB';
+    })
+    .catch(function () {});
+})();

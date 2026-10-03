@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Made by _build.js: edit that, not this. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -11,41 +12,97 @@
 <meta property="og:image" content="https://geosenselearnthemetas-arch.github.io/share.png">
 <meta property="og:image:width" content="192">
 <meta property="og:image:height" content="192">
+<meta name="theme-color" content="#0b1324">
 <link rel="icon" href="icon.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
-  <img class="logo" src="icon.png" alt="" width="112" height="112">
-  <p class="eyebrow" id="label">Daily challenge</p>
-  <h1 data-en="Can you beat my score?" data-es="¿Me superas?">Can you beat my score?</h1>
-  <p class="tag" data-en="Ten geography questions, the same for everyone today, in GeoSense." data-es="Diez preguntas de geografía, las mismas para todos hoy, en GeoSense.">Ten geography questions, the same for everyone today, in GeoSense.</p>
-  <a class="store" href="https://github.com/geosenselearnthemetas-arch/geosenselearnthemetas-arch.github.io/releases/latest/download/GeoSense.apk">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#3ddc84" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.5 11.5 0 0 0 12 8.2c-1.74 0-3.38.37-4.92.94L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
-    <span><small data-en="Download for" data-es="Descargar para">Download for</small><b>Android</b></span>
-  </a>
-  <p class="size" data-en="Free · about 25 MB · no account needed" data-es="Gratis · unos 25 MB · sin crear cuenta">Free · about 25 MB · no account needed</p>
+  <section class="invite">
+    <p class="eyebrow" id="label">Daily challenge</p>
+    <h2 data-es="¿Me superas?">Can you beat my score?</h2>
+    <p data-es="Diez preguntas de geografía, las mismas para todos hoy. Instala GeoSense y juega el reto de hoy.">Ten geography questions, the same for everyone today. Install GeoSense and play today’s challenge.</p>
+  </section>
+  <header class="app">
+    <img class="logo" src="icon.png" alt="" width="76" height="76">
+    <div>
+      <h1>GeoSense</h1>
+      <p class="by" data-es="Aprende las metas">Learn the metas</p>
+    </div>
+  </header>
+  <ul class="facts">
+    <li><b data-es="Gratis">Free</b><span data-es="precio">price</span></li>
+    <li><b id="size">25 MB</b><span data-es="descarga">download</span></li>
+    <li><b data-es="Sin anuncios">No ads</b><span data-es="nunca">ever</span></li>
+    <li><b>EN · ES</b><span data-es="idiomas">languages</span></li>
+  </ul>
+  <a class="install" href="https://github.com/geosenselearnthemetas-arch/geosenselearnthemetas-arch.github.io/releases/latest/download/GeoSense.apk"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.5 11.5 0 0 0 12 8.2c-1.74 0-3.38.37-4.92.94L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg><span data-es="Descargar para Android">Download for Android</span></a>
+  <p class="needs" data-es="Android 7.0 o superior · sin crear cuenta">Android 7.0 or later · no account needed</p>
+
+  <!-- store.js picks each image in the page's language. -->
+  <div class="shots" id="shots" aria-label="Screenshots">
+    <img data-n="1" alt="Home: the daily challenge, the word of the day and the lessons" data-es-alt="Inicio: el reto diario, la palabra del día y las lecciones" width="540" height="1115">
+    <img data-n="2" alt="Find the country on the map" data-es-alt="Encuentra el país en el mapa" width="540" height="1115">
+    <img data-n="3" alt="Which writing is on the sign?" data-es-alt="¿Qué escritura hay en la señal?" width="540" height="1115" loading="lazy">
+    <img data-n="4" alt="The capital, pinned on the map" data-es-alt="La capital, marcada en el mapa" width="540" height="1115" loading="lazy">
+    <img data-n="5" alt="Which side of the road they drive on" data-es-alt="Por qué lado se conduce" width="540" height="1115" loading="lazy">
+    <img data-n="6" alt="Which continent is it in?" data-es-alt="¿En qué continente está?" width="540" height="1115" loading="lazy">
+    <img data-n="7" alt="Your result, ready to share" data-es-alt="Tu resultado, listo para compartir" width="540" height="1115" loading="lazy">
+  </div>
+
+  <section>
+    <h3 data-es="Acerca de esta app">About this app</h3>
+    <p data-es="En las fotos a pie de calle, las pistas de dónde estás se esconden en los detalles: las letras de los carteles, las matrículas, el lado por el que circulan los coches. GeoSense te las enseña con lecciones cortas, unos minutos al día, y un reto diario para jugar con amigos.">On street-level photos, the clues to where you are hide in the details: the letters on the signs, the plates, the side of the road the cars drive on. GeoSense teaches them in short lessons, a few minutes a day, and a daily challenge to play with friends.</p>
+    <ul class="chips">
+      <li data-es="Banderas">Flags</li>
+      <li data-es="Capitales">Capitals</li>
+      <li data-es="Alfabetos">Alphabets</li>
+      <li data-es="Lado de conducción">Driving side</li>
+      <li data-es="Matrículas">License plates</li>
+      <li data-es="Cobertura de Street View">Street View coverage</li>
+      <li data-es="Dominios web">Web domains</li>
+      <li data-es="Prefijos">Phone codes</li>
+      <li data-es="Reto diario">Daily challenge</li>
+      <li data-es="Palabra del día">Word of the day</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3 data-es="Novedades">What’s new</h3>
+    <p class="meta" id="release">Version 1.0.0</p>
+    <ul class="list">
+      <li data-es="Revisa el reto diario: cada fallo en un mapa que puedes ampliar, con el porqué de la respuesta.">Review the daily challenge: every miss on a map you can zoom, with why the answer is right.</li>
+      <li data-es="Lecciones nuevas: matrículas, dominios web y prefijos telefónicos.">New lessons: license plates, web domains and phone codes.</li>
+      <li data-es="Palabra del día: una palabra de geografía en seis intentos.">Word of the day: a geography word in six tries.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3 data-es="Privacidad">Privacy</h3>
+    <ul class="privacy">
+      <li><span aria-hidden="true">👤</span><span data-es="Sin cuenta y sin registro.">No account and no sign-in.</span></li>
+      <li><span aria-hidden="true">📱</span><span data-es="Tu progreso se guarda solo en tu móvil.">Your progress is saved only on your phone.</span></li>
+      <li><span aria-hidden="true">🚫</span><span data-es="Sin anuncios ni rastreo.">No ads and no tracking.</span></li>
+      <li><span aria-hidden="true">✉️</span><span data-es="Solo envía algo si reportas una pregunta: esa pregunta y la versión de la app.">It only sends something when you report a question: that question and the app’s version.</span></li>
+    </ul>
+  </section>
+
   <details>
-    <summary data-en="How to install it" data-es="Cómo instalarla">How to install it</summary>
-    <p class="note" data-en="GeoSense is not on Google Play yet, so Android asks a few extra questions the first time. It is safe: say yes to them." data-es="GeoSense aún no está en Google Play, así que Android hace alguna pregunta más la primera vez. Es segura: acepta.">GeoSense is not on Google Play yet, so Android asks a few extra questions the first time. It is safe: say yes to them.</p>
+    <summary data-es="Cómo instalarla">How to install it</summary>
+    <p class="note" data-es="GeoSense aún no está en Google Play, así que Android hace alguna pregunta más la primera vez. Es segura: acepta.">GeoSense is not on Google Play yet, so Android asks a few extra questions the first time. It is safe: say yes to them.</p>
     <ol>
-      <li data-en="Tap &lt;b&gt;Download for Android&lt;/b&gt;. If the browser warns that the file could be harmful, tap &lt;b&gt;Download anyway&lt;/b&gt;." data-es="Pulsa &lt;b&gt;Descargar para Android&lt;/b&gt;. Si el navegador avisa de que el archivo puede ser dañino, pulsa &lt;b&gt;Descargar de todos modos&lt;/b&gt;.">Tap <b>Download for Android</b>. If the browser warns that the file could be harmful, tap <b>Download anyway</b>.</li>
-      <li data-en="Open &lt;b&gt;GeoSense.apk&lt;/b&gt;: from the download notification, or from the &lt;b&gt;Files&lt;/b&gt; app, in Downloads." data-es="Abre &lt;b&gt;GeoSense.apk&lt;/b&gt;: desde el aviso de descarga, o desde la app &lt;b&gt;Archivos&lt;/b&gt;, en Descargas.">Open <b>GeoSense.apk</b>: from the download notification, or from the <b>Files</b> app, in Downloads.</li>
-      <li data-en="If it says your phone is not allowed to install unknown apps from this source, tap &lt;b&gt;Settings&lt;/b&gt;, turn on &lt;b&gt;Allow from this source&lt;/b&gt; and go back. This lets your browser (or the Files app) install apps; you can turn it off afterwards." data-es="Si dice que tu móvil no puede instalar apps desconocidas de esta fuente, pulsa &lt;b&gt;Ajustes&lt;/b&gt;, activa &lt;b&gt;Permitir de esta fuente&lt;/b&gt; y vuelve atrás. Así das permiso al navegador (o a la app Archivos) para instalar apps; luego puedes quitarlo.">If it says your phone is not allowed to install unknown apps from this source, tap <b>Settings</b>, turn on <b>Allow from this source</b> and go back. This lets your browser (or the Files app) install apps; you can turn it off afterwards.</li>
-      <li data-en="If a security feature of your phone blocks the installation (some brands include an automatic blocker), turn it off for a moment in &lt;b&gt;Settings › Security&lt;/b&gt;, install GeoSense and turn it back on." data-es="Si alguna protección de seguridad del móvil bloquea la instalación (algunas marcas incluyen un bloqueador automático), desactívala un momento en &lt;b&gt;Ajustes › Seguridad&lt;/b&gt;, instala GeoSense y vuelve a activarla.">If a security feature of your phone blocks the installation (some brands include an automatic blocker), turn it off for a moment in <b>Settings › Security</b>, install GeoSense and turn it back on.</li>
-      <li data-en="If &lt;b&gt;Google Play Protect&lt;/b&gt; says it does not know the app, tap &lt;b&gt;More details&lt;/b&gt; and then &lt;b&gt;Install anyway&lt;/b&gt;." data-es="Si &lt;b&gt;Google Play Protect&lt;/b&gt; dice que no conoce la app, pulsa &lt;b&gt;Más detalles&lt;/b&gt; y luego &lt;b&gt;Instalar de todos modos&lt;/b&gt;.">If <b>Google Play Protect</b> says it does not know the app, tap <b>More details</b> and then <b>Install anyway</b>.</li>
-      <li data-en="Tap &lt;b&gt;Install&lt;/b&gt;, then &lt;b&gt;Open&lt;/b&gt;. To update it later, download it again from here and install it over the old one: your progress stays." data-es="Pulsa &lt;b&gt;Instalar&lt;/b&gt; y luego &lt;b&gt;Abrir&lt;/b&gt;. Para actualizarla más adelante, vuelve a descargarla desde aquí e instálala encima: no pierdes tu progreso.">Tap <b>Install</b>, then <b>Open</b>. To update it later, download it again from here and install it over the old one: your progress stays.</li>
+      <li data-es="Pulsa &lt;b&gt;Descargar para Android&lt;/b&gt;. Si el navegador avisa de que el archivo puede ser dañino, pulsa &lt;b&gt;Descargar de todos modos&lt;/b&gt;.">Tap <b>Download for Android</b>. If the browser warns that the file could be harmful, tap <b>Download anyway</b>.</li>
+      <li data-es="Abre &lt;b&gt;GeoSense.apk&lt;/b&gt;: desde el aviso de descarga, o desde la app &lt;b&gt;Archivos&lt;/b&gt;, en Descargas.">Open <b>GeoSense.apk</b>: from the download notification, or from the <b>Files</b> app, in Downloads.</li>
+      <li data-es="Si dice que tu móvil no puede instalar apps desconocidas de esta fuente, pulsa &lt;b&gt;Ajustes&lt;/b&gt;, activa &lt;b&gt;Permitir de esta fuente&lt;/b&gt; y vuelve atrás. Así das permiso al navegador (o a la app Archivos) para instalar apps; luego puedes quitarlo.">If it says your phone is not allowed to install unknown apps from this source, tap <b>Settings</b>, turn on <b>Allow from this source</b> and go back. This lets your browser (or the Files app) install apps; you can turn it off afterwards.</li>
+      <li data-es="Si alguna protección de seguridad del móvil bloquea la instalación (algunas marcas incluyen un bloqueador automático), desactívala un momento en &lt;b&gt;Ajustes › Seguridad&lt;/b&gt;, instala GeoSense y vuelve a activarla.">If a security feature of your phone blocks the installation (some brands include an automatic blocker), turn it off for a moment in <b>Settings › Security</b>, install GeoSense and turn it back on.</li>
+      <li data-es="Si &lt;b&gt;Google Play Protect&lt;/b&gt; dice que no conoce la app, pulsa &lt;b&gt;Más detalles&lt;/b&gt; y luego &lt;b&gt;Instalar de todos modos&lt;/b&gt;.">If <b>Google Play Protect</b> says it does not know the app, tap <b>More details</b> and then <b>Install anyway</b>.</li>
+      <li data-es="Pulsa &lt;b&gt;Instalar&lt;/b&gt; y luego &lt;b&gt;Abrir&lt;/b&gt;. Para actualizarla más adelante, vuelve a descargarla desde aquí e instálala encima: no pierdes tu progreso.">Tap <b>Install</b>, then <b>Open</b>. To update it later, download it again from here and install it over the old one: your progress stays.</li>
     </ol>
   </details>
+
+  <p class="legal" data-es="GeoSense es una app independiente, sin relación con Google. Android es una marca de Google LLC.">GeoSense is an independent app, not affiliated with Google. Android is a trademark of Google LLC.</p>
 </main>
 <script src="lang.js"></script>
-<script>
-  // "?7", or "?n=7" from the old /daily/ links: which challenge the link was shared from.
-  var n = new URLSearchParams(location.search).get('n') || location.search.slice(1);
-  var es = (navigator.language || '').toLowerCase().indexOf('es') === 0;
-  var label = es ? 'Reto diario' : 'Daily challenge';
-  if (n && /^\d+$/.test(n)) label += (es ? ' n.º ' : ' #') + n;
-  document.getElementById('label').textContent = label;
-</script>
+<script src="store.js"></script>
 </body>
 </html>
