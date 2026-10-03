@@ -4,6 +4,7 @@
   if (!es) return;
   document.documentElement.lang = 'es';
   document.querySelectorAll('[data-es]').forEach(function (el) {
-    el.textContent = el.getAttribute('data-es');
+    // Our own text, with <b> for the words to look for on screen.
+    el.innerHTML = el.getAttribute('data-es');
   });
 })();
