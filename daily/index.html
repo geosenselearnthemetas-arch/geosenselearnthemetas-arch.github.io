@@ -2,44 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoSense daily challenge</title>
-<meta name="description" content="Ten GeoGuessr questions, the same for everyone today. Can you beat my score?">
+<!-- Links shared until 2026-10. These tags are for link previews; people go on to /d. -->
 <meta property="og:title" content="GeoSense daily challenge">
 <meta property="og:description" content="Ten GeoGuessr questions, the same for everyone today. Can you beat my score?">
-<!-- Small and square: WhatsApp shows it as a thumbnail beside the text, not a big banner. -->
 <meta property="og:image" content="https://geosenselearnthemetas-arch.github.io/share.png">
 <meta property="og:image:width" content="192">
 <meta property="og:image:height" content="192">
-<link rel="icon" href="../icon.png">
-<link rel="stylesheet" href="../style.css">
+<script>location.replace('/d' + location.search);</script>
 </head>
-<body>
-<main>
-  <img class="logo" src="../icon.png" alt="" width="112" height="112">
-  <p class="eyebrow" id="label">Daily challenge</p>
-  <h1 data-en="Can you beat my score?" data-es="¿Me superas?">Can you beat my score?</h1>
-  <p class="tag" data-en="Ten GeoGuessr questions, the same for everyone today, in GeoSense." data-es="Diez preguntas de GeoGuessr, las mismas para todos hoy, en GeoSense.">Ten GeoGuessr questions, the same for everyone today, in GeoSense.</p>
-  <!-- Opens the app when it is installed, else the download. -->
-  <a class="button" id="open" href="intent://geosenselearnthemetas-arch.github.io/daily/#Intent;scheme=https;package=com.geosenseapp.geosense;S.browser_fallback_url=https%3A%2F%2Fgithub.com%2Fgeosenselearnthemetas-arch%2Fgeosenselearnthemetas-arch.github.io%2Freleases%2Flatest%2Fdownload%2FGeoSense.apk;end" data-en="Play it in GeoSense" data-es="Jugarlo en GeoSense">Play it in GeoSense</a>
-  <a class="link" href="https://github.com/geosenselearnthemetas-arch/geosenselearnthemetas-arch.github.io/releases/latest/download/GeoSense.apk" data-en="Don't have it? Download for Android" data-es="¿No la tienes? Descárgala para Android">Don't have it? Download for Android</a>
-  <details>
-    <summary data-en="How to install it" data-es="Cómo instalarla">How to install it</summary>
-    <ol>
-      <li data-en="Download the file GeoSense.apk with the link above." data-es="Descarga el archivo GeoSense.apk con el enlace de arriba.">Download the file GeoSense.apk with the link above.</li>
-      <li data-en="Open it. Android may ask you to allow installing apps from your browser: allow it." data-es="Ábrelo. Android puede pedirte que permitas instalar apps desde el navegador: permítelo.">Open it. Android may ask you to allow installing apps from your browser: allow it.</li>
-      <li data-en="Tap Install, then come back and tap Play it in GeoSense." data-es="Pulsa Instalar, vuelve aquí y pulsa Jugarlo en GeoSense.">Tap Install, then come back and tap Play it in GeoSense.</li>
-    </ol>
-  </details>
-</main>
-<script src="../lang.js"></script>
-<script>
-  // "?n=3": which challenge the link was shared from.
-  var n = new URLSearchParams(location.search).get('n');
-  var es = (navigator.language || '').toLowerCase().indexOf('es') === 0;
-  var label = es ? 'Reto diario' : 'Daily challenge';
-  if (n && /^\d+$/.test(n)) label += (es ? ' n.º ' : ' #') + n;
-  document.getElementById('label').textContent = label;
-</script>
-</body>
+<body></body>
 </html>
