@@ -93,15 +93,15 @@ h1, h2, h3 { line-height: 1.2; }
   padding: 0 16px 10px;
   scrollbar-width: thin;
 }
+.shots picture { flex: none; display: block; scroll-snap-align: start; }
 .shots img {
-  flex: none;
+  display: block;
   height: 400px;
   width: auto;
   aspect-ratio: 540 / 1115;
   border-radius: 14px;
   border: 1px solid var(--line);
   background: var(--card);
-  scroll-snap-align: start;
 }
 
 section { margin-top: 26px; }

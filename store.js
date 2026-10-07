@@ -1,11 +1,15 @@
-// The app page's live bits: screenshots in the page's language, the daily
+// The app page's live bits: screenshots in the page's language (light or
+// dark as the phone is set, picked by the <source> in each <picture>), the daily
 // challenge number from the link, and the version, date and size of the
 // APK on offer. Runs after lang.js.
 (function () {
   var es = document.documentElement.lang === 'es';
 
   document.querySelectorAll('#shots img').forEach(function (img) {
-    img.src = 'shots/' + (es ? 'es-' : 'en-') + img.getAttribute('data-n') + '.jpg';
+    var name = 'shots/' + (es ? 'es-' : 'en-');
+    var n = img.getAttribute('data-n') + '.jpg';
+    img.previousElementSibling.srcset = name + 'light-' + n;
+    img.src = name + 'dark-' + n;
     if (es) img.alt = img.getAttribute('data-es-alt');
   });
 

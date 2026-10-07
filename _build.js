@@ -18,11 +18,11 @@ const android = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="current
 
 const shots = [
   ['Home: the daily challenge, the word of the day and the lessons', 'Inicio: el reto diario, la palabra del día y las lecciones'],
-  ['Find the country on the map', 'Encuentra el país en el mapa'],
+  ['A real car with its plate blurred: which country is it?', 'Un coche real con la matrícula difuminada: ¿de qué país es?'],
   ['Which writing is on the sign?', '¿Qué escritura hay en la señal?'],
-  ['The capital, pinned on the map', 'La capital, marcada en el mapa'],
-  ['Which side of the road they drive on', 'Por qué lado se conduce'],
-  ['Which continent is it in?', '¿En qué continente está?'],
+  ['Missed it? The clue explained: yellow plates with the EU strip', '¿Fallaste? La pista explicada: matrículas amarillas con la franja de la UE'],
+  ['Which country’s flag is this?', '¿De qué país es esta bandera?'],
+  ['Find the country on the map', 'Encuentra el país en el mapa'],
   ['Your result, ready to share', 'Tu resultado, listo para compartir'],
 ];
 
@@ -79,9 +79,10 @@ ${daily ? `  <section class="invite">
   <a class="install" href="${apk}">${android}${t('span', 'Download for Android', 'Descargar para Android')}</a>
   ${t('p', 'Android 7.0 or later · no account needed', 'Android 7.0 o superior · sin crear cuenta', 'class="needs"')}
 
-  <!-- store.js picks each image in the page's language. -->
+  <!-- store.js picks each image in the page's language; the browser picks
+       the light or dark one, as the phone is set. -->
   <div class="shots" id="shots" aria-label="Screenshots">
-${shots.map(([en, es], i) => `    <img data-n="${i + 1}" alt="${esc(en)}" data-es-alt="${esc(es)}" width="540" height="1115"${i > 1 ? ' loading="lazy"' : ''}>`).join('\n')}
+${shots.map(([en, es], i) => `    <picture><source media="(prefers-color-scheme: light)"><img data-n="${i + 1}" alt="${esc(en)}" data-es-alt="${esc(es)}" width="540" height="1115"${i > 1 ? ' loading="lazy"' : ''}></picture>`).join('\n')}
   </div>
 
   <section>
