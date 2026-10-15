@@ -141,3 +141,13 @@ ol li { margin-bottom: 6px; }
 ol b { color: var(--text); }
 
 .legal { margin-top: 30px; text-align: center; color: var(--muted); font-size: 12px; }
+
+.more { margin-top: 10px !important; font-size: 15px; }
+a { color: var(--gold); }
+
+/* The privacy policy: plain reading, the same look as the app's page. */
+.policy h1 { margin: 14px 0 4px; font-size: 30px; }
+.policy > .meta { color: var(--muted); }
+.policy section p { margin-bottom: 10px; }
+.policy .list { margin-bottom: 10px; }
+.back { text-decoration: none; font-weight: 700; }

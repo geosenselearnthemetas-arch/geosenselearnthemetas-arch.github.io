@@ -32,6 +32,113 @@ const features = [
   ['Phone codes', 'Prefijos'], ['Daily challenge', 'Reto diario'], ['Word of the day', 'Palabra del día'],
 ];
 
+// The short version, on the app's page; privacy.html has the whole of it.
+const privacyPoints = [
+  ['👤', 'No account and no sign-in.', 'Sin cuenta y sin registro.'],
+  ['📱', 'Your progress is saved only on your phone.', 'Tu progreso se guarda solo en tu móvil.'],
+  ['🚫', 'No ads, no analytics and no tracking.', 'Sin anuncios, sin analíticas y sin rastreo.'],
+  ['🔔', 'Reminders, if you turn them on, go through our server: an anonymous identifier, your phone’s push address and when to send them.', 'Los recordatorios, si los activas, pasan por nuestro servidor: un identificador anónimo, la dirección push de tu móvil y cuándo enviarlos.'],
+  ['✉️', 'When you report an error in a question, it sends that question, your comment and the app’s version.', 'Si notificas un error en una pregunta, envía esa pregunta, tu comentario y la versión de la app.'],
+];
+
+const email = 'geosense.learnthemetas@gmail.com';
+const mail = `<a href="mailto:${email}">${email}</a>`;
+
+// The privacy policy: sections of [English, Spanish] blocks. A block is a
+// paragraph, or a list when it is an array of pairs.
+const policy = [
+  ['Data controller', 'Responsable del tratamiento', [
+    [`GeoSense is a free application, with no advertising and no registration, developed by Damián Delgado, who is the controller of the personal data described in this policy. For any query or request regarding your personal data, please contact ${mail}.`,
+     `GeoSense es una aplicación gratuita, sin publicidad y sin registro, desarrollada por Damián Delgado, responsable del tratamiento de los datos personales descritos en esta política. Para cualquier consulta o solicitud relativa a tus datos personales, puedes dirigirte a ${mail}.`],
+  ]],
+  ['Data stored on your device', 'Datos almacenados en tu dispositivo', [
+    ['Your progress, streak, settings and reminder times are stored solely on your device. They are not transmitted to any server and are erased when the application is uninstalled or its data is cleared.',
+     'Tu progreso, tu racha, tus ajustes y los horarios de tus recordatorios se almacenan únicamente en tu dispositivo. No se transmiten a ningún servidor y se eliminan al desinstalar la aplicación o borrar sus datos.'],
+    ['Data is transmitted outside your device only in the cases described below.',
+     'Los datos solo se transmiten fuera de tu dispositivo en los supuestos que se describen a continuación.'],
+  ]],
+  ['Reminders', 'Recordatorios', [
+    ['Android frequently delays alarms from applications that are used infrequently. For this reason, GeoSense delivers its reminders as push notifications. Only if you enable a reminder does the application:',
+     'Android retiene con frecuencia las alarmas de las aplicaciones que se usan poco. Por este motivo, GeoSense envía sus recordatorios como notificaciones push. Únicamente si activas un recordatorio, la aplicación:'],
+    [
+      ['register with our server (Supabase) as an anonymous user, identified by a random identifier, without any name, email address or phone number;',
+       'se registra en nuestro servidor (Supabase) como usuario anónimo, mediante un identificador aleatorio, sin nombre, dirección de correo electrónico ni número de teléfono;'],
+      ['send it your device’s push address (a Firebase Cloud Messaging token) and the reminders scheduled for the following days, with their time and text.',
+       'le envía la dirección push de tu dispositivo (un token de Firebase Cloud Messaging) y los recordatorios previstos para los próximos días, con su hora y su texto.'],
+    ],
+    ['At the scheduled time, the server sends each reminder through Firebase Cloud Messaging, a service provided by Google. This data is used exclusively to deliver the reminders you have requested. The legal basis for this processing is your consent, given when you enable reminders, which you may withdraw at any time by disabling them in Settings.',
+     'A la hora prevista, el servidor envía cada recordatorio a través de Firebase Cloud Messaging, un servicio de Google. Estos datos se utilizan exclusivamente para enviarte los recordatorios que has solicitado. La base jurídica del tratamiento es tu consentimiento, prestado al activar los recordatorios, que puedes retirar en cualquier momento desactivándolos en Ajustes.'],
+    ['Each reminder is deleted once it has been sent, and all pending reminders are deleted when you disable them. The push address is deleted after 90 days without the application being opened, or as soon as it ceases to be valid (for example, when the application is uninstalled).',
+     'Cada recordatorio se elimina una vez enviado, y todos los pendientes se eliminan al desactivarlos. La dirección push se elimina transcurridos 90 días sin abrir la aplicación, o en cuanto deja de ser válida (por ejemplo, al desinstalarla).'],
+    ['Supabase stores this data on servers located in London, United Kingdom, a country recognized by the European Union as providing an adequate level of protection. Google may process it in the United States under the EU-US Data Privacy Framework. On devices without Google Play services, reminders are handled entirely on the device and no data is transmitted.',
+     'Supabase almacena estos datos en servidores ubicados en Londres (Reino Unido), país al que la Unión Europea reconoce un nivel de protección adecuado. Google puede tratarlos en Estados Unidos al amparo del Marco de Privacidad de Datos UE-EE. UU. En los dispositivos sin servicios de Google Play, los recordatorios se gestionan íntegramente en el dispositivo y no se transmite ningún dato.'],
+  ]],
+  ['Question reports', 'Notificación de errores en preguntas', [
+    ['When you report a question you consider incorrect, the application sends: the question concerned (its wording, the options, the correct answer and the one you selected), the reason and any comment you provide, the application version, the Android version and device model, the language and certain settings (theme, map and level). This information does not identify you.',
+     'Cuando notificas una pregunta que consideras errónea, la aplicación envía: la pregunta en cuestión (su enunciado, las opciones, la respuesta correcta y la que seleccionaste), el motivo y el comentario que añadas, la versión de la aplicación, la versión de Android y el modelo del dispositivo, el idioma y algunos ajustes (tema, mapa y nivel). Esta información no permite identificarte.'],
+    ['The report is delivered to GeoSense’s email address through a Google Apps Script service. Should this fail, the application opens your email client instead, in which case the report is sent from your email address, as with any other message. Please do not include personal data in your comments.',
+     'El informe se remite a la dirección de correo electrónico de GeoSense mediante un servicio de Google Apps Script. Si este envío falla, la aplicación abre tu cliente de correo, en cuyo caso el informe se envía desde tu dirección de correo electrónico, como cualquier otro mensaje. Te rogamos que no incluyas datos personales en los comentarios.'],
+    ['Reports are used solely to correct the question concerned, on the basis of your consent, given by choosing to send them. They are retained until the issue is resolved, and for no longer than one year.',
+     'Los informes se utilizan únicamente para corregir la pregunta afectada, sobre la base de tu consentimiento, prestado al decidir enviarlos. Se conservan hasta resolver la incidencia y, como máximo, durante un año.'],
+  ]],
+  ['Third-party services', 'Servicios de terceros', [
+    ['Some questions display Street View imagery, loaded in real time from Google through the Google Maps SDK. In addition, on startup the application obtains a push address for the device from Firebase (Google), even if reminders are never enabled; this address is not sent to our server unless you enable them. In both cases your device connects to Google, which, as with any website, receives your IP address and certain technical data about the device, in accordance with the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. GeoSense does not receive any of this data.',
+     'Algunas preguntas muestran imágenes de Street View, cargadas en tiempo real desde Google mediante el SDK de Google Maps. Además, al iniciarse, la aplicación obtiene de Firebase (Google) una dirección push para el dispositivo, aunque nunca se activen los recordatorios; esta dirección no se envía a nuestro servidor salvo que los actives. En ambos casos, tu dispositivo se conecta a Google, que, como cualquier sitio web, recibe tu dirección IP y determinados datos técnicos del dispositivo, conforme a la <a href="https://policies.google.com/privacy">Política de privacidad de Google</a>. GeoSense no recibe ninguno de estos datos.'],
+    ['This website and the application download are hosted on GitHub, which receives data of the same kind when you visit the site or download the application, in accordance with the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>. This website does not use cookies.',
+     'Este sitio web y la descarga de la aplicación están alojados en GitHub, que recibe datos de la misma naturaleza cuando visitas el sitio o descargas la aplicación, conforme a la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">Declaración de privacidad de GitHub</a>. Este sitio web no utiliza cookies.'],
+  ]],
+  ['Use of data', 'Uso de los datos', [
+    ['GeoSense does not display advertising, use analytics tools or build user profiles. Your data is not sold or disclosed to third parties other than the service providers named in this policy, and only for the purposes described herein.',
+     'GeoSense no muestra publicidad, no utiliza herramientas de analítica ni elabora perfiles de usuario. Tus datos no se venden ni se ceden a terceros distintos de los proveedores mencionados en esta política, y únicamente para los fines aquí descritos.'],
+  ]],
+  ['Minors', 'Menores de edad', [
+    ['GeoSense is suitable for all ages and does not request any name, email address or account. Users under the age of 14 should obtain the permission of a parent or legal guardian before enabling reminders or sending a report.',
+     'GeoSense es apta para todas las edades y no solicita nombre, dirección de correo electrónico ni cuenta. Los usuarios menores de 14 años deben contar con la autorización de sus padres o tutores legales antes de activar los recordatorios o enviar un informe.'],
+  ]],
+  ['Your rights', 'Tus derechos', [
+    [`You may exercise your rights of access, rectification, erasure, restriction of processing, objection and data portability by writing to ${mail}. As reminder data is anonymous, the most direct way to erase it is to disable reminders (which deletes them immediately) and uninstall the application (the push address is then deleted within 90 days).`,
+     `Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación del tratamiento, oposición y portabilidad escribiendo a ${mail}. Dado que los datos de los recordatorios son anónimos, la forma más directa de suprimirlos es desactivar los recordatorios (que se eliminan de inmediato) y desinstalar la aplicación (la dirección push se elimina en un plazo de 90 días).`],
+    ['If you consider that your data has not been processed lawfully, you may lodge a complaint with the Spanish Data Protection Agency (<a href="https://www.aepd.es">aepd.es</a>) or with the supervisory authority of your country.',
+     'Si consideras que tus datos no se han tratado conforme a la normativa, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">aepd.es</a>) o ante la autoridad de control de tu país.'],
+  ]],
+  ['Changes to this policy', 'Modificaciones de esta política', [
+    ['Any changes to this policy will be published on this page, with the updated date shown at the top.',
+     'Cualquier modificación de esta política se publicará en esta página, con la fecha de actualización indicada al inicio.'],
+  ]],
+];
+
+function privacyPage() {
+  const block = (b) => Array.isArray(b[0])
+    ? `    <ul class="list">\n${b.map(([en, es]) => `      ${t('li', en, es)}`).join('\n')}\n    </ul>`
+    : `    ${t('p', b[0], b[1])}`;
+  return `<!doctype html>
+<!-- Made by _build.js: edit that, not this. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoSense privacy policy</title>
+<meta name="description" content="What GeoSense keeps on your phone, what it sends and why.">
+<meta name="theme-color" content="#0b1324">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="policy">
+  <a class="back" href="./">${t('span', '← GeoSense', '← GeoSense')}</a>
+  ${t('h1', 'Privacy policy', 'Política de privacidad')}
+  ${t('p', 'Last updated: 15 October 2026', 'Última actualización: 15 de octubre de 2026', 'class="meta"')}
+${policy.map(([en, es, blocks]) => `  <section>
+    ${t('h3', en, es)}
+${blocks.map(block).join('\n')}
+  </section>`).join('\n')}
+</main>
+<script src="lang.js"></script>
+</body>
+</html>
+`;
+}
+
 function page({ daily }) {
   const title = daily ? 'GeoSense daily challenge' : 'GeoSense: Learn the Metas';
   const description = daily
@@ -106,11 +213,9 @@ ${features.map(([en, es]) => `      ${t('li', en, es)}`).join('\n')}
   <section>
     ${t('h3', 'Privacy', 'Privacidad')}
     <ul class="privacy">
-      <li><span aria-hidden="true">👤</span>${t('span', 'No account and no sign-in.', 'Sin cuenta y sin registro.')}</li>
-      <li><span aria-hidden="true">📱</span>${t('span', 'Your progress is saved only on your phone.', 'Tu progreso se guarda solo en tu móvil.')}</li>
-      <li><span aria-hidden="true">🚫</span>${t('span', 'No ads and no tracking.', 'Sin anuncios ni rastreo.')}</li>
-      <li><span aria-hidden="true">✉️</span>${t('span', 'It only sends something when you report a question: that question and the app’s version.', 'Solo envía algo si reportas una pregunta: esa pregunta y la versión de la app.')}</li>
+${privacyPoints.map(([icon, en, es]) => `      <li><span aria-hidden="true">${icon}</span>${t('span', en, es)}</li>`).join('\n')}
     </ul>
+    <p class="more">${t('a', 'Read the privacy policy', 'Lee la política de privacidad', 'href="privacy"')}</p>
   </section>
 
   <details>
@@ -137,3 +242,4 @@ ${features.map(([en, es]) => `      ${t('li', en, es)}`).join('\n')}
 
 fs.writeFileSync('index.html', page({ daily: false }));
 fs.writeFileSync('d.html', page({ daily: true }));
+fs.writeFileSync('privacy.html', privacyPage());
