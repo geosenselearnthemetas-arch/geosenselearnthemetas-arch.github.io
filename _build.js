@@ -36,7 +36,8 @@ const features = [
 const privacyPoints = [
   ['👤', 'No account and no sign-in.', 'Sin cuenta y sin registro.'],
   ['📱', 'Your progress is saved only on your phone.', 'Tu progreso se guarda solo en tu móvil.'],
-  ['🚫', 'No ads, no analytics and no tracking.', 'Sin anuncios, sin analíticas y sin rastreo.'],
+  ['🚫', 'No ads, no third-party analytics and no tracking.', 'Sin anuncios, sin analíticas de terceros y sin rastreo.'],
+  ['📊', 'Once a day it anonymously notes that the app was opened, to count players. You can turn it off in Settings.', 'Una vez al día anota de forma anónima que se abrió la app, para contar jugadores. Puedes desactivarlo en Ajustes.'],
   ['🔔', 'Reminders, if you turn them on, go through our server: an anonymous identifier, your phone’s push address and when to send them.', 'Los recordatorios, si los activas, pasan por nuestro servidor: un identificador anónimo, la dirección push de tu móvil y cuándo enviarlos.'],
   ['✉️', 'When you report an error in a question, it sends that question, your comment and the app’s version.', 'Si notificas un error en una pregunta, envía esa pregunta, tu comentario y la versión de la app.'],
 ];
@@ -61,8 +62,8 @@ const policy = [
     ['Android frequently delays alarms from applications that are used infrequently. For this reason, GeoSense delivers its reminders as push notifications. Only if you enable a reminder does the application:',
      'Android retiene con frecuencia las alarmas de las aplicaciones que se usan poco. Por este motivo, GeoSense envía sus recordatorios como notificaciones push. Únicamente si activas un recordatorio, la aplicación:'],
     [
-      ['register with our server (Supabase) as an anonymous user, identified by a random identifier, without any name, email address or phone number;',
-       'se registra en nuestro servidor (Supabase) como usuario anónimo, mediante un identificador aleatorio, sin nombre, dirección de correo electrónico ni número de teléfono;'],
+      ['uses the anonymous identifier described under “Usage statistics” to connect to our server (Supabase), registering it if it does not yet exist;',
+       'utiliza el identificador anónimo descrito en «Estadísticas de uso» para conectarse a nuestro servidor (Supabase), y lo crea si aún no existe;'],
       ['send it your device’s push address (a Firebase Cloud Messaging token) and the reminders scheduled for the following days, with their time and text.',
        'le envía la dirección push de tu dispositivo (un token de Firebase Cloud Messaging) y los recordatorios previstos para los próximos días, con su hora y su texto.'],
     ],
@@ -72,6 +73,14 @@ const policy = [
      'Cada recordatorio se elimina una vez enviado, y todos los pendientes se eliminan al desactivarlos. La dirección push se elimina transcurridos 90 días sin abrir la aplicación, o en cuanto deja de ser válida (por ejemplo, al desinstalarla).'],
     ['Supabase stores this data on servers located in London, United Kingdom, a country recognized by the European Union as providing an adequate level of protection. Google may process it in the United States under the EU-US Data Privacy Framework. On devices without Google Play services, reminders are handled entirely on the device and no data is transmitted.',
      'Supabase almacena estos datos en servidores ubicados en Londres (Reino Unido), país al que la Unión Europea reconoce un nivel de protección adecuado. Google puede tratarlos en Estados Unidos al amparo del Marco de Privacidad de Datos UE-EE. UU. En los dispositivos sin servicios de Google Play, los recordatorios se gestionan íntegramente en el dispositivo y no se transmite ningún dato.'],
+  ]],
+  ['Usage statistics', 'Estadísticas de uso', [
+    ['To know how many people use GeoSense, once a day the application informs our server (Supabase) that it has been opened and which version it is running. To do so, it registers as an anonymous user, identified by a random identifier, without any name, email address or phone number. No other data is sent: neither your progress, nor your answers, nor your location.',
+     'Para saber cuántas personas utilizan GeoSense, una vez al día la aplicación comunica a nuestro servidor (Supabase) que se ha abierto y qué versión ejecuta. Para ello se registra como usuario anónimo, mediante un identificador aleatorio, sin nombre, dirección de correo electrónico ni número de teléfono. No se envía ningún otro dato: ni tu progreso, ni tus respuestas, ni tu ubicación.'],
+    ['This information is used only to calculate aggregate figures, such as the number of daily, weekly and monthly active users. The legal basis is our legitimate interest in knowing how the application is used in order to maintain and improve it. You may object at any time by disabling “Count my days played” in Settings, which also deletes the days already recorded.',
+     'Esta información se utiliza únicamente para obtener cifras agregadas, como el número de usuarios activos por día, semana y mes. La base jurídica es nuestro interés legítimo en conocer el uso de la aplicación para mantenerla y mejorarla. Puedes oponerte en cualquier momento desactivando «Contar mis días de juego» en Ajustes, lo que además elimina los días ya registrados.'],
+    ['Each day recorded is deleted after 13 months. The data is stored on the Supabase servers in London described above.',
+     'Cada día registrado se elimina transcurridos 13 meses. Los datos se almacenan en los servidores de Supabase en Londres descritos más arriba.'],
   ]],
   ['Question reports', 'Notificación de errores en preguntas', [
     ['When you report a question you consider incorrect, the application sends: the question concerned (its wording, the options, the correct answer and the one you selected), the reason and any comment you provide, the application version, the Android version and device model, the language and certain settings (theme, map and level). This information does not identify you.',
@@ -88,16 +97,16 @@ const policy = [
      'Este sitio web y la descarga de la aplicación están alojados en GitHub, que recibe datos de la misma naturaleza cuando visitas el sitio o descargas la aplicación, conforme a la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">Declaración de privacidad de GitHub</a>. Este sitio web no utiliza cookies.'],
   ]],
   ['Use of data', 'Uso de los datos', [
-    ['GeoSense does not display advertising, use analytics tools or build user profiles. Your data is not sold or disclosed to third parties other than the service providers named in this policy, and only for the purposes described herein.',
-     'GeoSense no muestra publicidad, no utiliza herramientas de analítica ni elabora perfiles de usuario. Tus datos no se venden ni se ceden a terceros distintos de los proveedores mencionados en esta política, y únicamente para los fines aquí descritos.'],
+    ['GeoSense does not display advertising, use third-party analytics tools or build user profiles. Your data is not sold or disclosed to third parties other than the service providers named in this policy, and only for the purposes described herein.',
+     'GeoSense no muestra publicidad, no utiliza herramientas de analítica de terceros ni elabora perfiles de usuario. Tus datos no se venden ni se ceden a terceros distintos de los proveedores mencionados en esta política, y únicamente para los fines aquí descritos.'],
   ]],
   ['Minors', 'Menores de edad', [
     ['GeoSense is suitable for all ages and does not request any name, email address or account. Users under the age of 14 should obtain the permission of a parent or legal guardian before enabling reminders or sending a report.',
      'GeoSense es apta para todas las edades y no solicita nombre, dirección de correo electrónico ni cuenta. Los usuarios menores de 14 años deben contar con la autorización de sus padres o tutores legales antes de activar los recordatorios o enviar un informe.'],
   ]],
   ['Your rights', 'Tus derechos', [
-    [`You may exercise your rights of access, rectification, erasure, restriction of processing, objection and data portability by writing to ${mail}. As reminder data is anonymous, the most direct way to erase it is to disable reminders (which deletes them immediately) and uninstall the application (the push address is then deleted within 90 days).`,
-     `Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación del tratamiento, oposición y portabilidad escribiendo a ${mail}. Dado que los datos de los recordatorios son anónimos, la forma más directa de suprimirlos es desactivar los recordatorios (que se eliminan de inmediato) y desinstalar la aplicación (la dirección push se elimina en un plazo de 90 días).`],
+    [`You may exercise your rights of access, rectification, erasure, restriction of processing, objection and data portability by writing to ${mail}. As this data is anonymous, the most direct way to erase it is to disable “Count my days played” and reminders in Settings (which deletes the days recorded and the reminders immediately) and then uninstall the application (the push address is deleted within 90 days).`,
+     `Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación del tratamiento, oposición y portabilidad escribiendo a ${mail}. Dado que estos datos son anónimos, la forma más directa de suprimirlos es desactivar «Contar mis días de juego» y los recordatorios en Ajustes (lo que elimina de inmediato los días registrados y los recordatorios) y, después, desinstalar la aplicación (la dirección push se elimina en un plazo de 90 días).`],
     ['If you consider that your data has not been processed lawfully, you may lodge a complaint with the Spanish Data Protection Agency (<a href="https://www.aepd.es">aepd.es</a>) or with the supervisory authority of your country.',
      'Si consideras que tus datos no se han tratado conforme a la normativa, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">aepd.es</a>) o ante la autoridad de control de tu país.'],
   ]],
