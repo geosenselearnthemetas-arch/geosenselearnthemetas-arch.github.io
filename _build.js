@@ -156,12 +156,32 @@ ${blocks.map(block).join('\n')}
 `;
 }
 
-function page({ daily }) {
-  const title = daily ? 'GeoSense daily challenge' : 'GeoSense: Learn the Metas';
-  const description = daily
-    ? 'Ten geography questions, the same for everyone today. Can you beat my score?'
+// The invitations on top of the app's page, for links shared with a result:
+// d.html for the daily challenge, w.html for the word of the day.
+const invites = {
+  daily: {
+    title: 'GeoSense daily challenge',
+    description: 'Ten geography questions, the same for everyone today. Can you beat my score?',
+    label: ['Daily challenge', 'Reto diario'],
+    heading: ['Can you beat my score?', '¿Me superas?'],
+    text: ['Ten geography questions, the same for everyone today. Install GeoSense and play today’s challenge.', 'Diez preguntas de geografía, las mismas para todos hoy. Instala GeoSense y juega el reto de hoy.'],
+  },
+  word: {
+    title: 'GeoSense word of the day',
+    description: 'A geography word in six tries, the same for everyone today. Can you guess it?',
+    label: ['Word of the day', 'Palabra del día'],
+    heading: ['Can you guess today’s word?', '¿Adivinas la palabra de hoy?'],
+    text: ['A geography word in six tries, the same for everyone today. Install GeoSense and play today’s word.', 'Una palabra de geografía en seis intentos, la misma para todos hoy. Instala GeoSense y juega la palabra de hoy.'],
+  },
+};
+
+function page({ invite }) {
+  const shared = invites[invite];
+  const title = shared ? shared.title : 'GeoSense: Learn the Metas';
+  const description = shared
+    ? shared.description
     : 'Learn the metas: flags, road lines, alphabets, driving side... the clues that tell where a photo was taken. A few minutes a day.';
-  const ogDescription = daily ? description : 'Learn the clues that tell where a photo was taken, a few minutes a day.';
+  const ogDescription = shared ? description : 'Learn the clues that tell where a photo was taken, a few minutes a day.';
   return `<!doctype html>
 <!-- Made by _build.js: edit that, not this. -->
 <html lang="en">
@@ -182,10 +202,10 @@ function page({ daily }) {
 </head>
 <body>
 <main>
-${daily ? `  <section class="invite">
-    <p class="eyebrow" id="label">Daily challenge</p>
-    ${t('h2', 'Can you beat my score?', '¿Me superas?')}
-    ${t('p', 'Ten geography questions, the same for everyone today. Install GeoSense and play today’s challenge.', 'Diez preguntas de geografía, las mismas para todos hoy. Instala GeoSense y juega el reto de hoy.')}
+${shared ? `  <section class="invite">
+    ${t('p', ...shared.label, 'class="eyebrow" id="label"')}
+    ${t('h2', ...shared.heading)}
+    ${t('p', ...shared.text)}
   </section>
 ` : ''}  <header class="app">
     <img class="logo" src="icon.png" alt="" width="76" height="76">
@@ -257,6 +277,7 @@ ${privacyPoints.map(([icon, en, es]) => `      <li><span aria-hidden="true">${ic
 `;
 }
 
-fs.writeFileSync('index.html', page({ daily: false }));
-fs.writeFileSync('d.html', page({ daily: true }));
+fs.writeFileSync('index.html', page({}));
+fs.writeFileSync('d.html', page({ invite: 'daily' }));
+fs.writeFileSync('w.html', page({ invite: 'word' }));
 fs.writeFileSync('privacy.html', privacyPage());

@@ -1,6 +1,6 @@
 // The app page's live bits: screenshots in the page's language (light or
-// dark as the phone is set, picked by the <source> in each <picture>), the daily
-// challenge number from the link, and the version, date and size of the
+// dark as the phone is set, picked by the <source> in each <picture>), the number of
+// the daily challenge or word from the link, and the version, date and size of the
 // APK on offer. Runs after lang.js.
 (function () {
   var es = document.documentElement.lang === 'es';
@@ -13,13 +13,12 @@
     if (es) img.alt = img.getAttribute('data-es-alt');
   });
 
-  // "/d?7", or "?n=7" from the old /daily/ links: which challenge was shared.
+  // "/d?7" or "/w?7", or "?n=7" from the old /daily/ links: which challenge
+  // or word was shared. The label is already in the page's language.
   var label = document.getElementById('label');
   if (label) {
     var n = new URLSearchParams(location.search).get('n') || location.search.slice(1);
-    var text = es ? 'Reto diario' : 'Daily challenge';
-    if (/^\d+$/.test(n)) text += (es ? ' n.º ' : ' #') + n;
-    label.textContent = text;
+    if (/^\d+$/.test(n)) label.textContent += (es ? ' n.º ' : ' #') + n;
   }
 
   // The release the download button gives. Left as written in the page if
