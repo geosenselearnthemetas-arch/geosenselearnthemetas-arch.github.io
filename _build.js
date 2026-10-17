@@ -90,6 +90,14 @@ const policy = [
     ['The legal basis is our legitimate interest in providing the service you use without losing your progress. You may object at any time by disabling “Keep a copy online” in Settings, which deletes the copy immediately. A copy that has not been updated for two years is deleted. The data is stored on the Supabase servers in London described above.',
      'La base jurídica es nuestro interés legítimo en prestarte el servicio que utilizas sin que pierdas tu progreso. Puedes oponerte en cualquier momento desactivando «Guardar una copia en internet» en Ajustes, lo que elimina la copia de inmediato. Una copia que lleve dos años sin actualizarse se elimina. Los datos se almacenan en los servidores de Supabase en Londres descritos más arriba.'],
   ]],
+  ['Daily challenge comparison', 'Comparativa del reto diario', [
+    ['When you finish the daily challenge, the application sends your result to our server (Supabase), under the anonymous identifier described under “Usage statistics”: the challenge number, which questions you answered correctly and your thinking time. Nothing else is sent, and nothing that identifies you. Only the first result sent for each challenge is kept.',
+     'Al terminar el reto diario, la aplicación envía tu resultado a nuestro servidor (Supabase), con el identificador anónimo descrito en «Estadísticas de uso»: el número del reto, qué preguntas acertaste y tu tiempo de reflexión. No se envía nada más, ni nada que te identifique. Solo se conserva el primer resultado enviado de cada reto.'],
+    ['These results are used only to show each player aggregate figures for that challenge: the percentage of players they did better than, their position, how many players obtained each score and the percentage who answered each question correctly. No other player’s individual result is ever shown. The legal basis is our legitimate interest in offering this comparison, which is part of the game.',
+     'Estos resultados se utilizan únicamente para mostrar a cada jugador cifras agregadas de ese reto: el porcentaje de jugadores a los que ha superado, su posición, cuántos jugadores obtuvieron cada puntuación y el porcentaje que acertó cada pregunta. Nunca se muestra el resultado individual de otro jugador. La base jurídica es nuestro interés legítimo en ofrecer esta comparativa, que forma parte del juego.'],
+    ['Each result is deleted after 13 months. The data is stored on the Supabase servers in London described above.',
+     'Cada resultado se elimina transcurridos 13 meses. Los datos se almacenan en los servidores de Supabase en Londres descritos más arriba.'],
+  ]],
   ['Question reports', 'Notificación de errores en preguntas', [
     ['When you report a question you consider incorrect, the application sends: the question concerned (its wording, the options, the correct answer and the one you selected), the reason and any comment you provide, the application version, the Android version and device model, the language and certain settings (theme, map and level). This information does not identify you.',
      'Cuando notificas una pregunta que consideras errónea, la aplicación envía: la pregunta en cuestión (su enunciado, las opciones, la respuesta correcta y la que seleccionaste), el motivo y el comentario que añadas, la versión de la aplicación, la versión de Android y el modelo del dispositivo, el idioma y algunos ajustes (tema, mapa y nivel). Esta información no permite identificarte.'],
@@ -144,7 +152,7 @@ function privacyPage() {
 <main class="policy">
   <a class="back" href="./">${t('span', '← GeoSense', '← GeoSense')}</a>
   ${t('h1', 'Privacy policy', 'Política de privacidad')}
-  ${t('p', 'Last updated: 15 October 2026', 'Última actualización: 15 de octubre de 2026', 'class="meta"')}
+  ${t('p', 'Last updated: 17 October 2026', 'Última actualización: 17 de octubre de 2026', 'class="meta"')}
 ${policy.map(([en, es, blocks]) => `  <section>
     ${t('h3', en, es)}
 ${blocks.map(block).join('\n')}
