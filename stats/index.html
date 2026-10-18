@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>GeoSense Stats</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+<meta name="theme-color" content="#0b1426">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800&display=swap">
+<style>
+/* The app's own look: midnight ground, gold for what matters, highway-sign
+   type. Dark first, as the app's home; light follows the phone. */
+:root {
+  --bg: #0b1426; --card: #111d35; --raised: #18284a; --line: #24375e;
+  --text: #f6f5f1; --muted: #aeb9cf; --faint: #5a6e96;
+  --gold: #d4a640; --gold-soft: #3a3320; --blue: #5b8fd6; --ok: #2bb673; --bad: #e5484d;
+  --font: "Overpass", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root { --bg: #f6f5f1; --card: #ffffff; --raised: #f0eee8; --line: #e3e1da; --text: #0b1426; --muted: #5e677a; --faint: #aeb9cf;
+    --gold: #b8862b; --gold-soft: #f8eed5; --blue: #1d4f91; color-scheme: light; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font: 16px/1.45 var(--font); -webkit-font-smoothing: antialiased; }
+main {
+  max-width: 1120px; margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 48px max(16px, env(safe-area-inset-left));
+  display: flex; flex-direction: column; gap: 28px;
+}
+header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+header img { width: 44px; height: 44px; border-radius: 12px; }
+header h1 { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.01em; }
+header h1 span { color: var(--gold); }
+.when { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.head-text { display: flex; flex-direction: column; flex: 1; min-width: 12rem; }
+.actions { display: flex; gap: 8px; }
+button {
+  font: 700 14px var(--font); color: var(--text); background: var(--raised); border: 1px solid var(--line);
+  border-radius: 999px; padding: 8px 16px; cursor: pointer;
+}
+button:hover { border-color: var(--gold); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+button.primary { background: var(--gold); color: #0b1426; border-color: var(--gold); }
+.eyebrow { margin: 0; color: var(--gold); font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; font-size: 12px; }
+h2 { margin: 0; font-size: 20px; font-weight: 800; }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+.kpi .label { color: var(--muted); font-size: 13px; font-weight: 600; }
+.kpi .value { font-size: 40px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .sub { color: var(--muted); font-size: 13px; }
+.kpi.lead { border-color: var(--gold); }
+.kpi.lead .value { color: var(--gold); }
+
+section { display: flex; flex-direction: column; gap: 12px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 12px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.card h3 { margin: 0; font-size: 16px; font-weight: 700; }
+.note { margin: 0; color: var(--muted); font-size: 13px; }
+.chart { min-height: 180px; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; }
+.rule { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.chip { display: inline-block; padding: 1px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; background: var(--raised); border: 1px solid var(--line); color: var(--text); }
+.chip.on { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th { text-align: left; color: var(--muted); font-weight: 600; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.n, td.n { text-align: right; }
+.scroll { overflow-x: auto; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.list li:last-child { border-bottom: 0; }
+.list b { font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); font-size: 14px; padding: 12px 0; }
+
+/* Asked once: the key that unlocks the numbers. */
+.gate { max-width: 420px; margin: 12vh auto 0; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.gate h2 { font-size: 22px; }
+.gate input { font: 16px var(--font); padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--text); width: 100%; }
+.error { color: var(--bad); font-size: 14px; margin: 0; }
+.foot { color: var(--muted); font-size: 12px; max-width: 70ch; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <form class="gate" id="gate" hidden>
+    <p class="eyebrow">GeoSense</p>
+    <h2>Stats</h2>
+    <p class="note">Enter the stats key. It is kept on this device, so you only type it once.</p>
+    <label for="key" class="note">Key</label>
+    <input id="key" name="key" type="password" autocomplete="off" spellcheck="false" required>
+    <p class="error" id="gate-error" hidden></p>
+    <button class="primary" type="submit">Show stats</button>
+  </form>
+
+  <div id="board" hidden style="display: contents">
+    <header>
+      <img src="../icon.png" alt="">
+      <div class="head-text">
+        <h1>Geo<span>Sense</span> stats</h1>
+        <span class="when" id="when">Loading…</span>
+      </div>
+      <div class="actions">
+        <button type="button" id="refresh">Refresh</button>
+        <button type="button" id="forget" title="Remove the key from this device">Sign out</button>
+      </div>
+    </header>
+    <p class="error" id="board-error" hidden></p>
+
+    <div class="kpis">
+      <div class="kpi lead"><span class="label">Website downloads</span><span class="value" id="k-downloads">—</span><span class="sub" id="k-downloads-sub">All stable versions</span></div>
+      <div class="kpi"><span class="label">Active today</span><span class="value" id="k-today">—</span><span class="sub">Installs that opened the app (UTC day)</span></div>
+      <div class="kpi"><span class="label">Active last 7 days</span><span class="value" id="k-week">—</span><span class="sub" id="k-week-sub">Each install once</span></div>
+      <div class="kpi"><span class="label">Come back</span><span class="value" id="k-return">—</span><span class="sub" id="k-return-sub">Installs that played on 2+ days</span></div>
+    </div>
+
+    <section>
+      <p class="eyebrow">Players</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Active installs per day</h3>
+          <p class="note">Each install once a day, phones only. Counted since Oct 15, 2026.</p>
+          <div class="legend"><span><i style="background: var(--faint)"></i>Seen before</span><span><i style="background: var(--gold)"></i>New that day</span></div>
+          <div class="chart" id="c-daily"></div>
+        </div>
+        <div class="card">
+          <h3>Days played per install</h3>
+          <p class="note">More than one day means they came back.</p>
+          <div class="chart" id="c-days"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Downloads and versions</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Downloads per stable version</h3>
+          <p class="note">From the website, while each version was the latest. The current one is live.</p>
+          <div class="chart" id="c-downloads"></div>
+        </div>
+        <div class="card">
+          <h3>Version in use</h3>
+          <p class="note">Last 30 days, the version each install last opened with. 1.0.0 is a local test build.</p>
+          <div class="chart" id="c-versions"></div>
+          <div class="rule" id="update-rule"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Progress</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Player levels</h3>
+          <p class="note">From cloud progress copies, test builds left out.</p>
+          <div class="chart" id="c-levels"></div>
+        </div>
+        <div class="card">
+          <h3>Current streaks</h3>
+          <p class="note">Days in a row, from the same copies.</p>
+          <div class="chart" id="c-streaks"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Daily challenge and reminders</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Daily challenge results</h3>
+          <p class="note">Real players only, scores out of 10.</p>
+          <div class="scroll">
+            <table>
+              <thead><tr><th>Challenge</th><th class="n">Players</th><th class="n">Average</th><th class="n">Perfect 10s</th><th class="n">Avg. time</th></tr></thead>
+              <tbody id="t-challenge"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Reminders and backups</h3>
+          <p class="note">Installs on the server right now.</p>
+          <ul class="list" id="l-counts"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Tests</p>
+      <div class="card">
+        <h3>Emulators and local builds</h3>
+        <p class="note">Last 30 days. Kept out of every count above.</p>
+        <ul class="list" id="l-tests"></ul>
+      </div>
+    </section>
+
+    <p class="foot">Players: Supabase (app opens, cloud progress copies, daily challenge, reminders). Downloads: the website's GitHub release, live for the current version. Only installs that share usage (on by default) are counted as players.</p>
+  </div>
+</main>
+
+<script>
+(() => {
+  const SUPABASE = 'https://kvlhqytsdhstkjhoclxu.supabase.co/rest/v1/rpc/stats_page';
+  const PUBLISHABLE = 'sb_publishable_TOpALZYOS3lzNgfkuiGY2Q_6zpB-Lw3';
+  const RELEASE = 'https://api.github.com/repos/geosenselearnthemetas-arch/geosenselearnthemetas-arch.github.io/releases/tags/latest';
+  const KEY = 'geosense-stats-key';
+  const $ = (id) => document.getElementById(id);
+  const num = new Intl.NumberFormat('en');
+  const pct = new Intl.NumberFormat('en', { style: 'percent', maximumFractionDigits: 0 });
+  const shortDay = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+
+  const storage = {
+    get() { try { return localStorage.getItem(KEY); } catch { return null; } },
+    set(v) { try { localStorage.setItem(KEY, v); } catch { /* kept for this visit only */ } },
+    clear() { try { localStorage.removeItem(KEY); } catch { /* nothing kept */ } },
+  };
+  let key = storage.get();
+
+  function showGate(message) {
+    $('board').hidden = true;
+    $('gate').hidden = false;
+    $('gate-error').hidden = !message;
+    $('gate-error').textContent = message || '';
+    $('key').focus();
+  }
+
+  $('gate').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    key = $('key').value.trim();
+    if (key) load(true);
+  });
+  $('refresh').addEventListener('click', () => load());
+  $('forget').addEventListener('click', () => { storage.clear(); key = null; $('key').value = ''; showGate(); });
+
+  async function fetchStats() {
+    const res = await fetch(SUPABASE, {
+      method: 'POST',
+      headers: { apikey: PUBLISHABLE, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_key: key }),
+    });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw Object.assign(new Error(body.message || `Supabase answered ${res.status}`), { wrongKey: body.message === 'wrong key' });
+    return body;
+  }
+
+  async function fetchRelease() {
+    try {
+      const res = await fetch(RELEASE, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!res.ok) return null;
+      const r = await res.json();
+      const apk = (r.assets || []).find((a) => a.name === 'GeoSense.apk');
+      return apk ? { version: (r.name || '').replace(/^GeoSense /, ''), downloads: apk.download_count, published: apk.updated_at.slice(0, 10) } : null;
+    } catch { return null; }
+  }
+
+  let loading = false;
+  async function load(fromGate) {
+    if (!key) return showGate();
+    if (loading) return;
+    loading = true;
+    $('refresh').disabled = true;
+    try {
+      const [stats, release] = await Promise.all([fetchStats(), fetchRelease()]);
+      if (fromGate) storage.set(key);
+      $('gate').hidden = true;
+      $('board').hidden = false;
+      $('board-error').hidden = true;
+      draw(stats, release);
+    } catch (e) {
+      if (e.wrongKey) { storage.clear(); key = null; showGate('That key is not right. Check .geosense/stats_key.'); }
+      else if (fromGate || $('board').hidden) showGate(`Could not load the stats: ${e.message}. Check the connection and try again.`);
+      else { $('board-error').hidden = false; $('board-error').textContent = `Could not refresh: ${e.message}. Showing the last numbers.`; }
+    } finally {
+      loading = false;
+      $('refresh').disabled = false;
+    }
+  }
+
+  // ---- Drawing -------------------------------------------------------
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (name, attrs, text) => {
+    const n = document.createElementNS(NS, name);
+    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const textWidth = (svg, s, size) => { const t = el('text', { 'font-size': size }, s); svg.appendChild(t); const w = t.getComputedTextLength(); t.remove(); return w; };
+
+  function empty(box, message) { box.replaceChildren(); const p = document.createElement('p'); p.className = 'empty'; p.textContent = message; box.appendChild(p); }
+
+  // Columns, stacked when there are several series. Values on top of each.
+  function columns(box, rows, label, series, { height = 200 } = {}) {
+    if (!rows.length) return empty(box, 'Nothing yet.');
+    box.replaceChildren();
+    const W = Math.max(280, box.clientWidth), H = height, top = 20, bottom = 26;
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'font-family': 'var(--font)' });
+    box.appendChild(svg);
+    const max = Math.max(1, ...rows.map((r) => series.reduce((s, k) => s + r[k.key], 0)));
+    const y = (v) => H - bottom - (v / max) * (H - top - bottom);
+    const step = W / rows.length, bw = Math.min(40, step * 0.62);
+    svg.appendChild(el('line', { x1: 0, x2: W, y1: H - bottom, y2: H - bottom, stroke: 'var(--line)' }));
+    const labelEvery = Math.ceil(rows.length / Math.max(1, Math.floor(W / 52)));
+    rows.forEach((r, i) => {
+      const cx = step * i + step / 2;
+      let base = 0;
+      series.forEach((s, j) => {
+        const v = r[s.key];
+        if (v > 0) {
+          const last = series.slice(j + 1).every((n) => !(r[n.key] > 0));
+          const h = y(base) - y(base + v);
+          svg.appendChild(el('rect', { x: cx - bw / 2, y: y(base + v), width: bw, height: Math.max(h, 1), rx: last ? 5 : 0, fill: s.color(r) }));
+          if (last) svg.appendChild(el('rect', { x: cx - bw / 2, y: y(base + v) + h / 2, width: bw, height: h / 2, fill: s.color(r) }));
+        }
+        base += v;
+      });
+      svg.appendChild(el('text', { x: cx, y: y(base) - 6, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700, fill: 'var(--text)' }, num.format(base)));
+      if (i % labelEvery === 0) svg.appendChild(el('text', { x: cx, y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, label(r)));
+    });
+  }
+
+  // Horizontal bars with the name on the left and the value at the end.
+  function bars(box, rows, name, value, color) {
+    if (!rows.length) return empty(box, 'Nothing yet.');
+    box.replaceChildren();
+    const W = Math.max(280, box.clientWidth), rowH = 32, H = rows.length * rowH;
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'font-family': 'var(--font)' });
+    box.appendChild(svg);
+    const left = Math.max(...rows.map((r) => textWidth(svg, name(r), 13))) + 12;
+    const right = textWidth(svg, num.format(Math.max(...rows.map(value))), 13) + 12;
+    const max = Math.max(1, ...rows.map(value));
+    rows.forEach((r, i) => {
+      const yy = i * rowH;
+      const w = Math.max(3, (value(r) / max) * (W - left - right));
+      svg.appendChild(el('text', { x: left - 10, y: yy + 20, 'text-anchor': 'end', 'font-size': 13, fill: 'var(--text)' }, name(r)));
+      svg.appendChild(el('rect', { x: left, y: yy + 7, width: w, height: 18, rx: 5, fill: color(r) }));
+      svg.appendChild(el('text', { x: left + w + 8, y: yy + 20, 'font-size': 13, 'font-weight': 700, fill: 'var(--muted)' }, num.format(value(r))));
+    });
+  }
+
+  let last = null;
+  function draw(s, release) {
+    last = [s, release];
+    const at = new Date(s.at);
+    $('when').textContent = `Updated ${at.toLocaleString('en', { dateStyle: 'medium', timeStyle: 'short' })}`;
+
+    // Downloads: closed versions plus the live count of the current one.
+    const history = s.downloads.map((d) => ({ ...d, live: false }));
+    if (release && !history.some((d) => d.version === release.version)) history.push({ version: release.version, published: release.published, downloads: release.downloads, live: true });
+    const total = history.reduce((n, d) => n + d.downloads, 0);
+    $('k-downloads').textContent = num.format(total);
+    $('k-downloads-sub').textContent = release ? `${num.format(release.downloads)} of them on ${release.version}, the current version` : 'Closed versions only: GitHub did not answer';
+
+    $('k-today').textContent = num.format(s.summary.today);
+    $('k-week').textContent = num.format(s.summary.last_7_days);
+    $('k-week-sub').textContent = `${num.format(s.summary.last_30_days)} in the last 30 days`;
+    const ret = s.returning;
+    $('k-return').textContent = ret.installs ? pct.format(ret.returned / ret.installs) : '—';
+    $('k-return-sub').textContent = `${num.format(ret.returned)} of ${num.format(ret.installs)} installs played on 2+ days`;
+
+    // Last 30 days of activity.
+    const daily = s.daily.slice(-30).map((d) => ({ ...d, old: d.active - d.new }));
+    columns($('c-daily'), daily, (d) => shortDay(d.day), [
+      { key: 'old', color: () => 'var(--faint)' },
+      { key: 'new', color: () => 'var(--gold)' },
+    ]);
+    columns($('c-days'), s.days_played, (d) => (d.days === 1 ? '1 day' : `${d.days} days`), [{ key: 'installs', color: () => 'var(--blue)' }]);
+    columns($('c-downloads'), history, (d) => d.version, [{ key: 'downloads', color: (d) => (d.live ? 'var(--gold)' : 'var(--faint)') }]);
+
+    const kind = (v) => (v === '1.0.0' ? 'test' : v.includes('-beta') ? 'beta' : 'stable');
+    bars($('c-versions'), s.versions, (r) => r.version, (r) => r.installs,
+      (r) => ({ stable: 'var(--gold)', beta: 'var(--blue)', test: 'var(--faint)' })[kind(r.version)]);
+
+    const rule = s.update_rule || {};
+    const ruleBox = $('update-rule');
+    ruleBox.replaceChildren();
+    const chip = (text, on) => { const c = document.createElement('span'); c.className = 'chip' + (on ? ' on' : ''); c.textContent = text; return c; };
+    ruleBox.append('Update prompt:');
+    ruleBox.append(chip(rule.recommended ? `asks below ${rule.recommended}` : 'not asking', !!rule.recommended));
+    ruleBox.append(chip(rule.minimum ? `blocks below ${rule.minimum}` : 'not blocking', !!rule.minimum));
+
+    columns($('c-levels'), s.levels, (d) => `L${d.level}`, [{ key: 'players', color: () => 'var(--gold)' }]);
+    columns($('c-streaks'), s.streaks, (d) => `${d.streak}`, [{ key: 'players', color: () => 'var(--blue)' }]);
+
+    const tbody = $('t-challenge');
+    tbody.replaceChildren();
+    if (!s.challenge.length) { const tr = tbody.insertRow(); const td = tr.insertCell(); td.colSpan = 5; td.className = 'empty'; td.textContent = 'No results yet.'; }
+    s.challenge.slice().reverse().forEach((c) => {
+      const tr = tbody.insertRow();
+      [[`#${c.number}`], [num.format(c.players), 'n'], [Number(c.average).toFixed(1), 'n'], [num.format(c.perfect), 'n'], [`${Number(c.seconds).toFixed(0)} s`, 'n']].forEach(([t, cls]) => {
+        const td = tr.insertCell(); td.textContent = t; if (cls) td.className = cls;
+      });
+    });
+
+    const counts = s.counts;
+    const list = $('l-counts');
+    list.replaceChildren();
+    [
+      ['Phones with push notifications', counts.push_devices],
+      ['Installs with reminders', counts.reminder_installs],
+      ['… in Spanish', counts.reminders_es],
+      ['… in English', counts.reminders_en],
+      ['Have played the daily challenge', counts.challenge_players],
+      ['Cloud progress copies', counts.backups],
+    ].forEach(([label, value]) => {
+      const li = document.createElement('li');
+      const span = document.createElement('span'); span.textContent = label;
+      const b = document.createElement('b'); b.textContent = num.format(value);
+      li.append(span, b); list.appendChild(li);
+    });
+
+    const tests = $('l-tests');
+    tests.replaceChildren();
+    if (!s.tests.length) { const li = document.createElement('li'); li.className = 'empty'; li.textContent = 'No test installs in the last 30 days.'; tests.appendChild(li); }
+    s.tests.forEach((t) => {
+      const li = document.createElement('li');
+      const span = document.createElement('span'); span.textContent = `${t.kind === 'emulator' ? 'Emulator' : 'Local build'} · ${t.version}`;
+      const b = document.createElement('b'); b.textContent = num.format(t.installs);
+      li.append(span, b); tests.appendChild(li);
+    });
+  }
+
+  // Charts follow the width; numbers refresh every 5 minutes while in view.
+  let resize;
+  window.addEventListener('resize', () => { clearTimeout(resize); resize = setTimeout(() => last && draw(...last), 150); });
+  setInterval(() => { if (document.visibilityState === 'visible' && key && !$('board').hidden) load(); }, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && key && !$('board').hidden) load(); });
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  load();
+})();
+</script>
+</body>
+</html>
