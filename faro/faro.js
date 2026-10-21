@@ -14,7 +14,7 @@ const RELEASE_APK = 'GeoSense.apk';
 // Google's Street View viewer for the Scenes tab: a browser key that only
 // works on the panel's own sites (Maps JavaScript API only). Public by
 // design, like the publishable key above.
-const MAPS_KEY = '';
+const MAPS_KEY = 'AIzaSyDvoRAtgHHesjw9lhgHqqoXzSOXncLJW9s';
 
 const supabase = createClient(SUPABASE_URL, PUBLISHABLE, {
   auth: { persistSession: true, autoRefreshToken: true, storageKey: 'geotells-faro' },
