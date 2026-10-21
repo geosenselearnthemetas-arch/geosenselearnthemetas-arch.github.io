@@ -42,7 +42,7 @@ const privacyPoints = [
   ['✉️', 'When you report an error in a question, it sends that question, your comment and the app’s version.', 'Si notificas un error en una pregunta, envía esa pregunta, tu comentario y la versión de la app.'],
 ];
 
-const email = 'geosense.learnthemetas@gmail.com';
+const email = 'hello@geotells.com';
 const mail = `<a href="mailto:${email}">${email}</a>`;
 
 // The privacy policy: sections of [English, Spanish] blocks. A block is a
@@ -101,8 +101,8 @@ const policy = [
   ['Question reports', 'Notificación de errores en preguntas', [
     ['When you report a question you consider incorrect, the application sends: the question concerned (its wording, the options, the correct answer and the one you selected), the reason and any comment you provide, the application version, the Android version and device model, the language and certain settings (theme, map and level). This information does not identify you.',
      'Cuando notificas una pregunta que consideras errónea, la aplicación envía: la pregunta en cuestión (su enunciado, las opciones, la respuesta correcta y la que seleccionaste), el motivo y el comentario que añadas, la versión de la aplicación, la versión de Android y el modelo del dispositivo, el idioma y algunos ajustes (tema, mapa y nivel). Esta información no permite identificarte.'],
-    ['The report is delivered to GeoSense’s email address through a Google Apps Script service. Should this fail, the application opens your email client instead, in which case the report is sent from your email address, as with any other message. Please do not include personal data in your comments.',
-     'El informe se remite a la dirección de correo electrónico de GeoSense mediante un servicio de Google Apps Script. Si este envío falla, la aplicación abre tu cliente de correo, en cuyo caso el informe se envía desde tu dirección de correo electrónico, como cualquier otro mensaje. Te rogamos que no incluyas datos personales en los comentarios.'],
+    ['The report is stored on our server (Supabase, on the London servers described above), together with the anonymous identifier described in “Usage statistics”, so that once the problem is fixed the application can thank you and add the corresponding XP to your progress. Earlier versions of the application send it through a Google Apps Script service, which passes it on to the same server. Only the developer can read reports. Please do not include personal data in your comments.',
+     'El informe se guarda en nuestro servidor (Supabase, en los servidores de Londres descritos más arriba), junto con el identificador anónimo descrito en «Estadísticas de uso», para que, cuando el problema se corrija, la aplicación pueda darte las gracias y sumar a tu progreso los XP correspondientes. Las versiones anteriores de la aplicación lo envían a través de un servicio de Google Apps Script, que lo traslada al mismo servidor. Solo el desarrollador puede leer los informes. Te rogamos que no incluyas datos personales en los comentarios.'],
     ['Reports are used solely to correct the question concerned, on the basis of your consent, given by choosing to send them. They are retained until the issue is resolved, and for no longer than one year.',
      'Los informes se utilizan únicamente para corregir la pregunta afectada, sobre la base de tu consentimiento, prestado al decidir enviarlos. Se conservan hasta resolver la incidencia y, como máximo, durante un año.'],
   ]],
@@ -152,7 +152,7 @@ function privacyPage() {
 <main class="policy">
   <a class="back" href="./">${t('span', '← GeoSense', '← GeoSense')}</a>
   ${t('h1', 'Privacy policy', 'Política de privacidad')}
-  ${t('p', 'Last updated: 17 October 2026', 'Última actualización: 17 de octubre de 2026', 'class="meta"')}
+  ${t('p', 'Last updated: 21 October 2026', 'Última actualización: 21 de octubre de 2026', 'class="meta"')}
 ${policy.map(([en, es, blocks]) => `  <section>
     ${t('h3', en, es)}
 ${blocks.map(block).join('\n')}
