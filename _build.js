@@ -210,6 +210,14 @@ function page({ invite }) {
 </head>
 <body>
 <main>
+  <!-- The move: new players go to GeoTells; GeoSense's own get the last
+       GeoSense (1.7) below, which moves their progress with one tap. -->
+  <section class="invite moved">
+    ${t('p', 'New name', 'Nuevo nombre', 'class="eyebrow"')}
+    ${t('h2', 'GeoSense is now GeoTells', 'GeoSense ahora es GeoTells')}
+    ${t('p', 'Same game, new name, and it keeps growing there. New here? Get it at <a href="https://geotells.com">geotells.com</a>. Already playing GeoSense? Update it from the button below and tap <b>Move my progress to GeoTells</b>: your level and streak come along.', 'El mismo juego, con otro nombre, y ahí sigue creciendo. ¿Eres nuevo? Descárgalo en <a href="https://geotells.com">geotells.com</a>. ¿Ya juegas a GeoSense? Actualízala con el botón de abajo y pulsa <b>Pasar mi progreso a GeoTells</b>: tu nivel y tu racha se vienen contigo.')}
+    <a class="install" href="https://geotells.com">${t('span', 'Go to GeoTells', 'Ir a GeoTells')}</a>
+  </section>
 ${shared ? `  <section class="invite">
     ${t('p', ...shared.label, 'class="eyebrow" id="label"')}
     ${t('h2', ...shared.heading)}

@@ -151,3 +151,7 @@ a { color: var(--gold); }
 .policy section p { margin-bottom: 10px; }
 .policy .list { margin-bottom: 10px; }
 .back { text-decoration: none; font-weight: 700; }
+
+/* The move to GeoTells, on top of every page. */
+.moved .install { margin-top: 14px; font-size: 16px; padding: 11px; }
+.moved p a { color: var(--gold); }
